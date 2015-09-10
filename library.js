@@ -97,13 +97,12 @@
 
 					// Save their photo, if present
 					if (picture) {
-						user.setUserField(uid, 'uploadedpicture', picture);
-						user.setUserField(uid, 'picture', picture);
+						user.uploadFromUrl(uid, picture, function() {
+							callback(null, {
+								uid: uid
+							});
+						});
 					}
-
-					callback(null, {
-						uid: uid
-					});
 				};
 
 				user.getUidByEmail(email, function(err, uid) {
