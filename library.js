@@ -130,13 +130,14 @@
 					user.setUserField(uid, 'email:confirmed', autoConfirm);
 
 					// Save their photo, if present
-					if (picture) {
-						user.uploadFromUrl(uid, picture, function() {
-							callback(null, {
-								uid: uid
-							});
-						});
-					}
+          if (picture) {
+            user.setUserField(uid, 'uploadedpicture', picture);
+            user.setUserField(uid, 'picture', picture);
+          }
+
+          callback(null, {
+            uid: uid
+          });
 				};
 
 				user.getUidByEmail(email, function(err, uid) {
